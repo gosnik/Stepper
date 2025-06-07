@@ -44,7 +44,7 @@
 // https://github.com/pkerspe/ESP-FlexyStepper
 //
 
-#include "Stepper.h"
+#include "Stepper.hpp"
 
 //
 // direction signal level for "step and direction"
@@ -102,16 +102,6 @@ void Stepper::stopService(void)
 bool Stepper::isStartedAsService()
 {
   return false;
-}
-
-/**
- * get the overall max stack size since task creation (since the call to startAsService() )
- * This function is used to determine if the stacksize is large enough and has more of a debugging purpose.
- * Return the minimum amount of free bytes on the stack that has been measured so far.
- */
-long Stepper::getTaskStackHighWaterMark()
-{
-  return 0;
 }
 
 /**
@@ -216,32 +206,18 @@ bool Stepper::isMovingTowardsHome()
  * stepPinNumber = IO pin number for the Step signal
  * directionPinNumber = IO pin number for the direction signal
  */
-void Stepper::connectToPins(byte stepPinNumber, byte directionPinNumber, bool useOpenDrain)
+void Stepper::connectToPins(byte stepPinNumber, byte directionPinNumber)
 {
   this->stepPin = stepPinNumber;
   this->directionPin = directionPinNumber;
 
   // configure the IO pins
-  if (useOpenDrain)
-  {
-    pinMode(stepPin, OUTPUT_OPEN_DRAIN);
-  }
-  else
-  {
-    pinMode(stepPin, OUTPUT);
-  }
+  pinMode(stepPin, OUTPUT);
   digitalWrite(stepPin, LOW);
 
   if (directionPin < 255)
   {
-    if (useOpenDrain)
-    {
-      pinMode(directionPin, OUTPUT_OPEN_DRAIN);
-    }
-    else
-    {
-      pinMode(directionPin, OUTPUT);
-    }
+    pinMode(directionPin, OUTPUT);
     digitalWrite(directionPin, LOW);
   }
 }

@@ -21,7 +21,10 @@
     ],
     "dependencies": [
     ],
-    "examples": [
-        "[Ee]xamples/*/*.ino"
-    ]
+    "build": {
+        "includeDir": "include",
+        "flags": [
+            "-I include"
+        ]
+    }
 }
