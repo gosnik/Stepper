@@ -64,7 +64,7 @@ public:
   bool isStartedAsService(void);
 
   // IO setup and helper / debugging functions
-  void connectToPins(byte stepPinNumber, byte directionPinNumber = 255, bool useOpenDrain = false);
+  void connectToPins(byte stepPinNumber, byte directionPinNumber = 255);
   void setBrakePin(signed char brakePin, byte activeState = Stepper::ACTIVE_HIGH);
   void setEnablePin(signed char enablePin, byte activeState = Stepper::ACTIVE_LOW);
   void clearLimitSwitchActive(void);
